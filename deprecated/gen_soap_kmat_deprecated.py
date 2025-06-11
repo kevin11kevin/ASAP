@@ -63,12 +63,12 @@ def main(fxyz, dictxyz, prefix, soap_rcut, soap_g, soap_n, soap_l, soap_periodic
     if nframes > 1:
         # set up the soap descriptors
         soap_desc = SOAP(species=global_species, rcut=soap_rcut, nmax=soap_n, lmax=soap_l,
-                         sigma=soap_g, crossover=False, average=True, periodic=soap_periodic)
+                         sigma=soap_g, average=True, periodic=soap_periodic)
     else:
         # if only one frame we compute the kernel matrix (kmat) between the atomic environments
         # within this frame
         soap_desc = SOAP(species=global_species, rcut=soap_rcut, nmax=soap_n, lmax=soap_l,
-                         sigma=soap_g, crossover=False, average=False, periodic=soap_periodic)
+                         sigma=soap_g, average=False, periodic=soap_periodic)
 
     # compute soap fingerprints
     fall = soap_desc.create(frames, n_jobs=8)

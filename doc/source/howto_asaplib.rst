@@ -35,7 +35,6 @@ compute SOAP descriptors
                            'n': 6,
                            'l': 6,
                            'atom_gaussian_width': 0.5,
-                           'crossover': False,
                            'rbf': 'gto'
                           }
                 }

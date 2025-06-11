@@ -59,7 +59,7 @@ def main(fxyz, dictxyz, prefix, output, peratom, fsoap_param, soap_rcut, soap_g,
                                                               soap_param['atom_gaussian_width'], soap_param['n'],
                                                               soap_param['l']]
             soap_desc_atomic.append(SOAP(species=species_now, rcut=cutoff_now, nmax=n_now, lmax=l_now,
-                                         sigma=g_now, rbf="gto", crossover=False, average=False,
+                                         sigma=g_now, rbf="gto", average=False,
                                          periodic=soap_periodic))
 
         foutput = prefix + "-soapparam" + '-' + fsoap_param
@@ -67,7 +67,7 @@ def main(fxyz, dictxyz, prefix, output, peratom, fsoap_param, soap_rcut, soap_g,
 
     else:
         soap_desc_atomic = [SOAP(species=global_species, rcut=soap_rcut, nmax=soap_n, lmax=soap_l,
-                                 sigma=soap_g, rbf="gto", crossover=False, average=False, periodic=soap_periodic)]
+                                 sigma=soap_g, rbf="gto", average=False, periodic=soap_periodic)]
         foutput = prefix + "-n" + str(soap_n) + "-l" + str(soap_l) + "-c" + str(soap_rcut) + "-g" + str(soap_g)
         desc_name = "SOAP" + "-n" + str(soap_n) + "-l" + str(soap_l) + "-c" + str(soap_rcut) + "-g" + str(soap_g)
     for i, frame in enumerate(frames):

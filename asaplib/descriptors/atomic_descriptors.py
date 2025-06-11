@@ -148,11 +148,6 @@ class Atomic_Descriptor_SOAP(Atomic_Descriptor_Base):
         else:
             self.rbf = 'gto'
 
-        if 'crossover' in desc_spec.keys():
-            self.crossover = bool(desc_spec['crossover'])
-        else:
-            self.crossover = False
-
         if 'periodic' in desc_spec.keys():
             self.periodic = bool(desc_spec['periodic'])
         else:
@@ -166,7 +161,7 @@ class Atomic_Descriptor_SOAP(Atomic_Descriptor_Base):
     def create(self, frame):
         from dscribe.descriptors import SOAP
         self.soap = SOAP(species=self.species, r_cut=self.cutoff, n_max=self.n, l_max=self.l,
-                         sigma=self.g, rbf=self.rbf, crossover=self.crossover, average='off',
+                         sigma=self.g, rbf=self.rbf, average='off',
                          periodic=self._get_pbc(frame))
 
         # notice that we return the acronym here!!!

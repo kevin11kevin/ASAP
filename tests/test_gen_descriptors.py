@@ -26,7 +26,7 @@ def main(fxyz, prefix):
                          'cutoff': 2.0,
                          'n': 2, 'l': 2,
                          'atom_gaussian_width': 0.2,
-                         'rbf': 'gto', 'crossover': False}}
+                         'rbf': 'gto'}}
 
     acsf_js = {'acsf1': {'type': 'ACSF',
                          'cutoff': 2.0,

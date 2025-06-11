@@ -137,9 +137,6 @@ def gen_desc(ctx, in_file, fxyz, fxyz_format, prefix, stride, periodic, number_p
 @click.option('--atom-gaussian-width', '-sigma', '-g', type=float,
               help='The width of the Gaussian centered on atoms.',
               show_default=True, default=0.5)
-@click.option('--crossover/--no-crossover',
-              help='If to included the crossover of atomic types.',
-              show_default=True, default=False)
 @click.option('--universal_soap', '--usoap', '-u',
               type=click.Choice(['none', 'smart', 'minimal', 'longrange'], case_sensitive=False),
               help='Try out our universal SOAP parameters.',
@@ -147,14 +144,11 @@ def gen_desc(ctx, in_file, fxyz, fxyz_format, prefix, stride, periodic, number_p
 @click.pass_context
 @desc_options
 @atomic_to_global_desc_options
-def soap(ctx, tag, cutoff, nmax, lmax, atom_gaussian_width, crossover, rbf, universal_soap,
+def soap(ctx, tag, cutoff, nmax, lmax, atom_gaussian_width, rbf, universal_soap,
          reducer_type, zeta, element_wise, peratom):
     """Generate SOAP descriptors"""
     # load up the xyz
     ctx.obj['asapxyz'] = load_asapxyz(ctx.obj['data'])
-
-    if crossover is False:
-        print("Warning: atomic species cross terms are not included! use --crossover if you want cross terms.")
 
     if universal_soap != 'none' and cutoff is None and nmax is None and lmax is None:
         from asaplib.hypers import universal_soap_hyper
@@ -171,7 +165,6 @@ def soap(ctx, tag, cutoff, nmax, lmax, atom_gaussian_width, crossover, rbf, univ
 
     for k in soap_spec.keys():
         soap_spec[k]['rbf'] = rbf
-        soap_spec[k]['crossover'] = crossover
     # The specification for the reducers
     reducer_spec = dict(set_reducer(reducer_type, element_wise, zeta))
     # The specification for the descriptor
@@ -411,7 +404,7 @@ def kde_internal(ctx, dimension):
               help='The number of the first D dimensions to keep when doing KDE.',
               show_default=True, default=50)
 @click.option('--bw_method', '-bw', type=str,
-              help='This can be ‘scott’, ‘silverman’, a scalar constant or a callable.',
+              help='This can be "scott", "silverman", a scalar constant or a callable.',
               show_default=False, default=None)
 @click.pass_context
 def kde_scipy(ctx, bw_method, dimension):
