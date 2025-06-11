@@ -20,9 +20,18 @@ setuptools.setup(
         "Operating System :: OS Independent",
     ],
     install_requires=[
-        'dscribe==2.0.1', 'click>=7.0', 'numpy<=1.24.3', 'scipy<=1.10.1', 'scikit-learn<=1.2.2',
-        'ase<=3.22.1', 'umap-learn', 'PyYAML', 'tqdm', 'pandas', 'matplotlib<=3.7.1'
-    ],
+    'dscribe>=2.0.1',  # Remove the == to allow newer versions
+    'click>=7.0',      # This was already fine
+    'numpy>=1.24.3',   # Change <= to >= to set minimum version
+    'scipy>=1.10.1',   # Change <= to >= to set minimum version
+    'scikit-learn>=1.2.2',  # Change <= to >= to set minimum version
+    'ase>=3.22.1',     # Change <= to >= to set minimum version
+    'umap-learn',      # This was already fine
+    'PyYAML',          # This was already fine
+    'tqdm',            # This was already fine
+    'pandas',          # This was already fine
+    'matplotlib>=3.7.1'  # Change <= to >= to set minimum version
+],
     extras_require={'testing': ['pytest>=5.0']},
     python_requires='>=3.7',
     entry_points="""
